@@ -1,1 +1,16 @@
 For training 2021
+
+How to set up project:
+
+- Install gtest:
+	sudo apt-get install libgtest-dev
+
+- Prepare cmake project environment:
+	cmake -B ./build
+
+- Build:
+	cmake --build ./build --config Debug --target craftmanship_training_test -j 14
+
+- Run test:
+	./build/craftmanship_training_test 
+	
