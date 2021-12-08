@@ -9,7 +9,7 @@ int InitProject::GetSomething()
 
 std::string InitProject::GetHello()
 {
-    return "Hello!";
+    return "Hello World!";
 }
 
 bool InitProject::GetFalse()
