@@ -7,6 +7,11 @@ int InitProject::GetSomething()
     return 42;
 }
 
+String InitProject::GetHello()
+{
+    return "Hello!";
+}
+
 bool InitProject::GetFalse()
 {
     return false;
