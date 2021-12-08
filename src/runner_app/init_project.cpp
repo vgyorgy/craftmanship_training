@@ -7,7 +7,7 @@ int InitProject::GetSomething()
     return 42;
 }
 
-String InitProject::GetHello()
+std::string InitProject::GetHello()
 {
     return "Hello!";
 }

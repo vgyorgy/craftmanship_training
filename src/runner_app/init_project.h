@@ -4,7 +4,7 @@ class InitProject
 {
 public:
     int GetSomething();
-    String GetHello();
+    std::string GetHello();
     bool GetFalse();    
     void GetThrowException();
 };
