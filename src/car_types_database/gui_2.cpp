@@ -3,8 +3,9 @@
 
 #include <thread>
 #include <gtk/gtk.h>
-#include "gui.h"
 using namespace std;
+
+#include "gui.h"
 
 // Global variables through threads:
 GMutex     mutex_interface;
