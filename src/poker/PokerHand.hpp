@@ -1,8 +1,8 @@
 #pragma once
+#include <string>
 
 class PokerHand{
 
 public:
-    void evaluate();
-
+    void add(std::string card);
 };
