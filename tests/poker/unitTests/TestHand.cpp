@@ -1,4 +1,5 @@
 #include <gtest/gtest.h>
+#include "poker/PokerHand.hpp"
 #include "SpyPokerHand.hpp"
 #include "poker/InvalidPokerHandInput.hpp"
 #include "poker/NotImplementedExeption.hpp"
@@ -28,4 +29,21 @@ TEST(PokerHandTest, TestAddTwoCards) {
 
     ASSERT_EQ(pokerHand.getCardsInHand().at(1).cardSuit, CardSuit::CLUB);
     ASSERT_EQ(pokerHand.getCardsInHand().at(1).cardRank, CardRank::TWO);
+}
+
+TEST(PokerHandTest, TestPokerRankFlush) {
+    PokerHand pokerHand;
+    Card cards[5] = {        
+        Card(CardSuit::SPADE, CardRank::TWO),
+        Card(CardSuit::SPADE, CardRank::THREE),
+        Card(CardSuit::SPADE, CardRank::FOUR),
+        Card(CardSuit::SPADE, CardRank::FIVE),
+        Card(CardSuit::SPADE, CardRank::SEVEN),
+    };
+    
+    for (int i = 0; i < 5; i++) {
+        pokerHand.add(cards[i]);
+    }
+
+    ASSERT_EQ(pokerHand.getPokerRank(), "FLUSH");
 }

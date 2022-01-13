@@ -2,16 +2,19 @@
 #include <string>
 #include <vector>
 #include "Card.hpp"
-
-class PokerHand{
-protected:
-    std::vector<Card> cards;
+class PokerHand
+{
 private:
     int numberOfCards;
+
+    bool isFlush();
+
+protected:
+    std::vector<Card> cards;
+
 public:
-    void add(Card card);
-
     PokerHand();
+
+    void add(Card card);
+    std::string getPokerRank();
 };
-
-
