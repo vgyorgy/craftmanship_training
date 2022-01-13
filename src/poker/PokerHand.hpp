@@ -1,15 +1,15 @@
 #pragma once
 #include <string>
+#include <vector>
 #include "Card.hpp"
 
 class PokerHand{
 protected:
-    Card cards;
+    std::vector<Card> cards;
 private:
     int numberOfCards;
 public:
     void add(Card card);
-    int getTotalNumberOfCards(void);
 
     PokerHand();
 };

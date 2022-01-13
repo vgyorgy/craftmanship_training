@@ -18,6 +18,7 @@ enable_testing()
 
 file(GLOB SOURCES
   src/poker/*.cpp
+  tests/poker/unitTests/*.cpp
 )
 
 include_directories(src)

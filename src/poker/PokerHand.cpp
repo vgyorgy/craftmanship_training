@@ -7,10 +7,6 @@ PokerHand::PokerHand(){
 }
 
 void PokerHand::add(Card card){
-    cards = card;
+    cards.push_back(card);
     numberOfCards++;
-}
-
-int PokerHand::getTotalNumberOfCards(void){
-    return(numberOfCards);
 }
