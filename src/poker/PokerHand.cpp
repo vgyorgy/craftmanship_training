@@ -2,11 +2,15 @@
 #include "InvalidPokerHandInput.hpp"
 #include "NotImplementedExeption.hpp"
 
-void PokerHand::add(std::string card){
-    if (card == "")
-    {
-        throw InvalidPokerHandInput();
-    }
-    
-    throw NotImplementedExeption();
+PokerHand::PokerHand(){
+    numberOfCards = 0;
+}
+
+void PokerHand::add(Card card){
+    cards = card;
+    numberOfCards++;
+}
+
+int PokerHand::getTotalNumberOfCards(void){
+    return(numberOfCards);
 }

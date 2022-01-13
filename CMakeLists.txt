@@ -17,18 +17,15 @@ include_directories(${GTEST_INCLUDE_DIR})
 enable_testing()
 
 file(GLOB SOURCES
-  src/runner_app/*.cpp
   src/poker/*.cpp
 )
 
 include_directories(src)
-add_executable(craftmanship_training_test tests/runner_app/init_project_test.cpp ${SOURCES})
-target_link_libraries(craftmanship_training_test gtest_main ${GTEST_LIBRARIES} pthread)
+
 
 add_executable(pokerTest tests/poker/unitTests/TestHand.cpp ${SOURCES})
 target_link_libraries(pokerTest gtest_main ${GTEST_LIBRARIES} pthread)
 
 
 include(GoogleTest)
-gtest_discover_tests(craftmanship_training_test)
 gtest_discover_tests(pokerTest)
