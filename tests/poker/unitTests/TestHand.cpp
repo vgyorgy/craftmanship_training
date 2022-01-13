@@ -77,5 +77,23 @@ TEST(PokerHandTest, TestPokerRankPair) {
         pokerHand.add(cards[i]);
     }
 
-    ASSERT_EQ(pokerHand.getPokerRank(), "PAIR");
+    ASSERT_EQ(pokerHand.getPokerRank(), "ONE PAIR");
+}
+
+TEST(PokerHandTest, TestPokerRankTwoPair) {
+    PokerHand pokerHand;
+
+    Card cards[5] = {        
+        Card(CardSuit::SPADE, CardRank::EIGHT),
+        Card(CardSuit::HEART, CardRank::TWO),
+        Card(CardSuit::SPADE, CardRank::FOUR),
+        Card(CardSuit::SPADE, CardRank::TWO),
+        Card(CardSuit::SPADE, CardRank::EIGHT),
+    };
+    
+    for (int i = 0; i < 5; i++) {
+        pokerHand.add(cards[i]);
+    }
+
+    ASSERT_EQ(pokerHand.getPokerRank(), "TWO PAIR");
 }
