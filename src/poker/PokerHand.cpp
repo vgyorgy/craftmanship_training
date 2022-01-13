@@ -10,5 +10,3 @@ void PokerHand::add(std::string card){
     
     throw NotImplementedExeption();
 }
-
-//Töröld ki Bogdán
