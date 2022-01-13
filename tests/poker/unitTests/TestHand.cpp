@@ -4,6 +4,19 @@
 #include "poker/InvalidPokerHandInput.hpp"
 #include "poker/NotImplementedExeption.hpp"
 
+/*
+TODO
+
+PokerHand fillHand(Card[] cards){
+    PokerHand pokerHand;
+
+    for (int i = 0; i < 5; i++) {
+        pokerHand.add(cards[i]);
+    }
+
+    return pokerHand;
+};*/
+
 TEST(PokerHandTest, TestAddOneCard) {
     SpyPokerHand pokerHand;
     Card card(SPADE, TEN);
@@ -33,6 +46,7 @@ TEST(PokerHandTest, TestAddTwoCards) {
 
 TEST(PokerHandTest, TestPokerRankFlush) {
     PokerHand pokerHand;
+
     Card cards[5] = {        
         Card(CardSuit::SPADE, CardRank::TWO),
         Card(CardSuit::SPADE, CardRank::THREE),
@@ -46,4 +60,22 @@ TEST(PokerHandTest, TestPokerRankFlush) {
     }
 
     ASSERT_EQ(pokerHand.getPokerRank(), "FLUSH");
+}
+
+TEST(PokerHandTest, TestPokerRankPair) {
+    PokerHand pokerHand;
+
+    Card cards[5] = {        
+        Card(CardSuit::SPADE, CardRank::EIGHT),
+        Card(CardSuit::HEART, CardRank::TWO),
+        Card(CardSuit::SPADE, CardRank::FOUR),
+        Card(CardSuit::SPADE, CardRank::TWO),
+        Card(CardSuit::SPADE, CardRank::SEVEN),
+    };
+    
+    for (int i = 0; i < 5; i++) {
+        pokerHand.add(cards[i]);
+    }
+
+    ASSERT_EQ(pokerHand.getPokerRank(), "PAIR");
 }

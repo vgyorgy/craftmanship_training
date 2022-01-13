@@ -8,6 +8,8 @@ private:
     int numberOfCards;
 
     bool isFlush();
+    bool isPair();
+    bool hasPair(Card* card);
 
 protected:
     std::vector<Card> cards;

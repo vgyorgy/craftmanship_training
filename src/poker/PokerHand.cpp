@@ -21,10 +21,37 @@ bool PokerHand::isFlush()
     return true;
 }
 
+bool PokerHand::hasPair(Card* cardToCompare)
+{
+    int sameRankCounter = 0;
+
+    for (auto card : cards){
+        if (card.cardRank == (*cardToCompare).cardRank){
+            sameRankCounter++;
+        }
+    }
+
+    return sameRankCounter == 2 ? true : false;
+}
+
+bool PokerHand::isPair()
+{
+    for(int i = 0; i < 5; i++){
+        if(hasPair(&(cards.at(i))))
+            return true;
+    }
+    
+    return false;
+}
+
 std::string PokerHand::getPokerRank()
 {
     if (isFlush()) {
         return "FLUSH";
+    }
+
+    if (isPair()) {
+        return "PAIR";
     }
 
     throw NotImplementedExeption();
