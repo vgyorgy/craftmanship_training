@@ -3,25 +3,22 @@
 #include "SpyPokerHand.hpp"
 #include "poker/InvalidPokerHandInput.hpp"
 #include "poker/NotImplementedExeption.hpp"
+#include <vector>
 
-/*
-TODO
-
-PokerHand fillHand(Card[] cards){
-    PokerHand pokerHand;
-
-    for (int i = 0; i < 5; i++) {
-        pokerHand.add(cards[i]);
+void fillHand(PokerHand &pokerHand, const std::vector<Card> &cards)
+{
+    for (auto card : cards) {
+        pokerHand.add(card);
     }
-
-    return pokerHand;
-};*/
+}
 
 TEST(PokerHandTest, TestAddOneCard) {
+
     SpyPokerHand pokerHand;
-    Card card(SPADE, TEN);
     
-    pokerHand.add(card);
+    fillHand(pokerHand, {
+        Card(CardSuit::SPADE, CardRank::TEN),
+    });
 
     ASSERT_EQ(pokerHand.getCardsInHand().size(), 1);
     ASSERT_EQ(pokerHand.getCardsInHand().at(0).cardSuit, CardSuit::SPADE);
@@ -29,12 +26,13 @@ TEST(PokerHandTest, TestAddOneCard) {
 }
 
 TEST(PokerHandTest, TestAddTwoCards) {
+
     SpyPokerHand pokerHand;
-    Card first_card(CardSuit::SPADE, CardRank::TEN);
-    Card second_card(CardSuit::CLUB,  CardRank::TWO);
     
-    pokerHand.add(first_card);
-    pokerHand.add(second_card);
+    fillHand(pokerHand, {
+        Card(CardSuit::SPADE, CardRank::TEN),
+        Card(CardSuit::CLUB,  CardRank::TWO)
+    });
 
     ASSERT_EQ(pokerHand.getCardsInHand().size(), 2);
     ASSERT_EQ(pokerHand.getCardsInHand().at(0).cardSuit, CardSuit::SPADE);
@@ -45,55 +43,46 @@ TEST(PokerHandTest, TestAddTwoCards) {
 }
 
 TEST(PokerHandTest, TestPokerRankFlush) {
+    
     PokerHand pokerHand;
-
-    Card cards[5] = {        
+    
+    fillHand(pokerHand, {
         Card(CardSuit::SPADE, CardRank::TWO),
         Card(CardSuit::SPADE, CardRank::THREE),
         Card(CardSuit::SPADE, CardRank::FOUR),
         Card(CardSuit::SPADE, CardRank::FIVE),
         Card(CardSuit::SPADE, CardRank::SEVEN),
-    };
-    
-    for (int i = 0; i < 5; i++) {
-        pokerHand.add(cards[i]);
-    }
+    });
 
     ASSERT_EQ(pokerHand.getPokerRank(), "FLUSH");
 }
 
 TEST(PokerHandTest, TestPokerRankPair) {
+    
     PokerHand pokerHand;
-
-    Card cards[5] = {        
+    
+    fillHand(pokerHand, {
         Card(CardSuit::SPADE, CardRank::EIGHT),
         Card(CardSuit::HEART, CardRank::TWO),
         Card(CardSuit::SPADE, CardRank::FOUR),
         Card(CardSuit::SPADE, CardRank::TWO),
         Card(CardSuit::SPADE, CardRank::SEVEN),
-    };
-    
-    for (int i = 0; i < 5; i++) {
-        pokerHand.add(cards[i]);
-    }
+    });
 
     ASSERT_EQ(pokerHand.getPokerRank(), "ONE PAIR");
 }
 
 TEST(PokerHandTest, TestPokerRankTwoPair) {
+    
     PokerHand pokerHand;
-
-    Card cards[5] = {        
+    
+    fillHand(pokerHand, {
         Card(CardSuit::SPADE, CardRank::EIGHT),
         Card(CardSuit::HEART, CardRank::TWO),
         Card(CardSuit::SPADE, CardRank::FOUR),
         Card(CardSuit::SPADE, CardRank::TWO),
         Card(CardSuit::SPADE, CardRank::EIGHT),
-    };
-    
-    for (int i = 0; i < 5; i++) {
-        pokerHand.add(cards[i]);
-    }
+    });
 
     ASSERT_EQ(pokerHand.getPokerRank(), "TWO PAIR");
 }
