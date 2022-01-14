@@ -6,8 +6,6 @@
 class PokerHand
 {
 private:
-    int numberOfCards;
-
     bool isFlush();
     bool isOnePair();
     bool hasPair(Card* card);
