@@ -2,25 +2,30 @@
 #include <string>
 #include <vector>
 #include <map>
+
+#include "PokerRank.hpp"
+
 #include "Card.hpp"
 class PokerHand
 {
 private:
-    bool isFlush();
     bool isOnePair();
-    bool hasPair(Card* card);
-    std::map<CardRank, int> groupCardsByRank(void);
     bool isTwoPair(void);
+    bool isThreeOfAKind();
     bool isStraight(void);
+    bool isFlush();
+
+    std::map<CardRank, int> groupCardsByRank(void);
     bool hasGreaterNeighbour(int index);
-    
+    int countSameRanks(int numberOfSameKind);
+    void sortCardsByRank (void);
 
 protected:
     std::vector<Card> cards;
 
 public:
     PokerHand();
-    void sortCardsByRank (void);
+
     void add(Card card);
-    std::string getPokerRank();
+    PokerRank::Rank getPokerRank();
 };

@@ -22,33 +22,38 @@ bool PokerHand::isFlush()
     return true;
 }
 
-bool PokerHand::hasPair(Card* cardToCompare)
+int PokerHand::countSameRanks(int numberOfSameKind)
 {
-    int sameRankCounter = 0;
+    std::map<CardRank, int> countMap = groupCardsByRank();
+    int countOfGroups = 0;
 
-    for (auto card : cards){
-        if (card.cardRank == (*cardToCompare).cardRank){
-            sameRankCounter++;
+    for (auto & item : countMap)    
+    {
+        if (item.second == numberOfSameKind)
+        {
+            countOfGroups++;
         }
     }
 
-    return sameRankCounter == 2 ? true : false;
+    return countOfGroups;
 }
 
 bool PokerHand::isOnePair()
 {
-    for(int i = 0; i < 5; i++){
-        if(hasPair(&(cards.at(i))))
-            return true;
-    }
-    
-    return false;
+    return countSameRanks(2) == 1;
 }
 
+bool PokerHand::isTwoPair(void)
+{
+    return countSameRanks(2) == 2;
+}
+
+bool PokerHand::isThreeOfAKind()
+{
+    return countSameRanks(3) == 1;
+}
 std::map<CardRank, int> PokerHand::groupCardsByRank(void)
 {
-    // Map solution found here: https://thispointer.com/c-how-to-find-duplicates-in-a-vector/
-    // Iterate over the vector and store the frequency of each card in map
     std::map<CardRank, int> countMap;
     for (Card card : cards)
     {
@@ -58,41 +63,28 @@ std::map<CardRank, int> PokerHand::groupCardsByRank(void)
     return countMap;
 }
 
-bool PokerHand::isTwoPair(void)
-{
-    std::map<CardRank, int> countMap = groupCardsByRank();
-    int numberOfPairs = 0;
-
-    for (auto & elem : countMap)    // Iterate over the map
-    {
-        // std::cout << elem.first << " :: " << elem.second << std::endl;   // first = CardRank, second = int
-        if (elem.second >= 2)
-        {
-            numberOfPairs++;
-        }
-    }
-
-    return (numberOfPairs >= 2 ? true : false);
-}
-
-std::string PokerHand::getPokerRank()
+PokerRank::Rank PokerHand::getPokerRank()
 {
     sortCardsByRank();
 
     if (isFlush()) {
-        return "FLUSH";
+        return PokerRank::Rank::FLUSH;
+    }
+
+    if (isThreeOfAKind()) {
+        return PokerRank::Rank::THREE_OF_A_KIND;
     }
 
     if (isTwoPair()){
-        return "TWO PAIR";
+        return PokerRank::Rank::TWO_PAIRS;
     }
 
     if (isOnePair()) {
-        return "ONE PAIR";
+        return PokerRank::Rank::ONE_PAIR;
     }
 
     if (isStraight()) {
-        return "STRAIGHT";
+        return PokerRank::Rank::STRAIGHT;
     }
 
     throw NotImplementedExeption();

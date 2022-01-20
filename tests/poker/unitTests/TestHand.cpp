@@ -54,7 +54,7 @@ TEST(PokerHandTest, TestPokerRankFlush) {
         Card(CardSuit::SPADE, CardRank::SEVEN),
     });
 
-    ASSERT_EQ(pokerHand.getPokerRank(), "FLUSH");
+    ASSERT_EQ(pokerHand.getPokerRank(), PokerRank::Rank::FLUSH);
 }
 
 TEST(PokerHandTest, TestPokerRankPair) {
@@ -69,7 +69,7 @@ TEST(PokerHandTest, TestPokerRankPair) {
         Card(CardSuit::SPADE, CardRank::SEVEN),
     });
 
-    ASSERT_EQ(pokerHand.getPokerRank(), "ONE PAIR");
+    ASSERT_EQ(pokerHand.getPokerRank(), PokerRank::Rank::ONE_PAIR);
 }
 
 TEST(PokerHandTest, TestPokerRankTwoPair) {
@@ -84,48 +84,34 @@ TEST(PokerHandTest, TestPokerRankTwoPair) {
         Card(CardSuit::SPADE, CardRank::EIGHT),
     });
 
-    ASSERT_EQ(pokerHand.getPokerRank(), "TWO PAIR");
-}
-
-TEST(PokerHandTest, TestPokerSortByRank) {
-    SpyPokerHand pokerHand;
-    bool sorted = true;
-    Card cards[5] = {        
-        Card(CardSuit::SPADE, CardRank::FOUR),
-        Card(CardSuit::HEART, CardRank::SIX),
-        Card(CardSuit::SPADE, CardRank::FIVE),
-        Card(CardSuit::SPADE, CardRank::EIGHT),
-        Card(CardSuit::SPADE, CardRank::SEVEN),
-    };
-    
-    for (int i = 0; i < 5; i++) {
-        pokerHand.add(cards[i]);
-    }
-    pokerHand.sortCardsByRank();
-    for (int i = 0; i < 4; i++) {
-        if(pokerHand.getCardsInHand().at(i).cardRank > pokerHand.getCardsInHand().at(i+1).cardRank){
-            sorted = false;
-            
-        }
-    }
-    
-    ASSERT_EQ(sorted, true);
+    ASSERT_EQ(pokerHand.getPokerRank(), PokerRank::Rank::TWO_PAIRS);
 }
 
 TEST(PokerHandTest, TestPokerRankStraight) {
     PokerHand pokerHand;
 
-    Card cards[5] = {        
+   fillHand(pokerHand, {
         Card(CardSuit::SPADE, CardRank::FOUR),
         Card(CardSuit::HEART, CardRank::SIX),
         Card(CardSuit::SPADE, CardRank::FIVE),
         Card(CardSuit::SPADE, CardRank::EIGHT),
         Card(CardSuit::SPADE, CardRank::SEVEN),
-    };
+    });
     
-    for (int i = 0; i < 5; i++) {
-        pokerHand.add(cards[i]);
-    }
-    
-    ASSERT_EQ(pokerHand.getPokerRank(), "STRAIGHT");
+    ASSERT_EQ(pokerHand.getPokerRank(), PokerRank::Rank::STRAIGHT);
 }
+
+TEST(PokerHandTest, TestPokerRankThreeOfAKind) {
+    PokerHand pokerHand;
+
+   fillHand(pokerHand, {
+        Card(CardSuit::SPADE, CardRank::SIX),
+        Card(CardSuit::HEART, CardRank::SIX),
+        Card(CardSuit::CLUB,  CardRank::SIX),
+        Card(CardSuit::SPADE, CardRank::EIGHT),
+        Card(CardSuit::SPADE, CardRank::SEVEN),
+    });
+    
+    ASSERT_EQ(pokerHand.getPokerRank(), PokerRank::Rank::THREE_OF_A_KIND);
+}
+
