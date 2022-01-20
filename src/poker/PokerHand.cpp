@@ -11,6 +11,11 @@ void PokerHand::add(Card card){
     cards.push_back(card);
 }
 
+bool PokerHand::isRoyalFlush(void) {
+    return (isStraight() && cards.at(0).cardRank == CardRank::TEN &&
+            isFlush() && cards.at(0).cardSuit == CardSuit::SPADE);
+}
+
 bool PokerHand::isFlush()
 {
     for (auto card : cards) {
@@ -66,6 +71,10 @@ std::map<CardRank, int> PokerHand::groupCardsByRank(void)
 PokerRank::Rank PokerHand::getPokerRank()
 {
     sortCardsByRank();
+
+    if (isRoyalFlush()) {
+        return PokerRank::Rank::ROYAL_FLUSH;
+    }
 
     if (isFlush()) {
         return PokerRank::Rank::FLUSH;

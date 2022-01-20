@@ -7,7 +7,8 @@ class PokerRank{
         TWO_PAIRS,
         THREE_OF_A_KIND,
         FLUSH,
-        STRAIGHT
+        STRAIGHT,
+        ROYAL_FLUSH
     };
 };
 

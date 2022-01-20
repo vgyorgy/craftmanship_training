@@ -14,6 +14,7 @@ private:
     bool isThreeOfAKind();
     bool isStraight(void);
     bool isFlush();
+    bool isRoyalFlush(void);
 
     std::map<CardRank, int> groupCardsByRank(void);
     bool hasGreaterNeighbour(int index);

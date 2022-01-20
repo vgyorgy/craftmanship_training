@@ -115,3 +115,16 @@ TEST(PokerHandTest, TestPokerRankThreeOfAKind) {
     ASSERT_EQ(pokerHand.getPokerRank(), PokerRank::Rank::THREE_OF_A_KIND);
 }
 
+TEST(PokerHandTest, TestPokerRankRoyalFlush){
+    PokerHand pokerHand;
+
+    fillHand(pokerHand, {
+        Card(CardSuit::SPADE, CardRank::QUEEN),
+        Card(CardSuit::SPADE, CardRank::TEN),
+        Card(CardSuit::SPADE, CardRank::JACK),
+        Card(CardSuit::SPADE, CardRank::ACE),
+        Card(CardSuit::SPADE, CardRank::KING),
+    });
+    
+    ASSERT_EQ(pokerHand.getPokerRank(), PokerRank::Rank::ROYAL_FLUSH);
+}
