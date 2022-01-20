@@ -2,6 +2,7 @@
 #include "PokerHand.hpp"
 #include "InvalidPokerHandInput.hpp"
 #include "NotImplementedExeption.hpp"
+#include <algorithm>
 
 PokerHand::PokerHand(){
 }
@@ -15,6 +16,7 @@ bool PokerHand::isFlush()
     for (auto card : cards) {
         if (card.cardSuit != cards.at(0).cardSuit) {
             return false;
+
         }
     }
     return true;
@@ -75,6 +77,8 @@ bool PokerHand::isTwoPair(void)
 
 std::string PokerHand::getPokerRank()
 {
+    sortCardsByRank();
+
     if (isFlush()) {
         return "FLUSH";
     }
@@ -87,5 +91,34 @@ std::string PokerHand::getPokerRank()
         return "ONE PAIR";
     }
 
+    if (isStraight()) {
+        return "STRAIGHT";
+    }
+
     throw NotImplementedExeption();
+}
+
+void PokerHand::sortCardsByRank (void){
+    auto compareRank = [](const Card &a, const Card &b)->bool{
+        return (a.cardRank<b.cardRank);
+    };
+    std::sort(cards.begin(), cards.end(), compareRank);
+}
+
+bool PokerHand::hasGreaterNeighbour(int index){
+    return (cards.at(index).cardRank +1) == cards.at(index+1).cardRank;
+}
+
+bool PokerHand::isStraight(void){
+    bool isStraight = true;
+
+    for (int i = 0; i < cards.size()-1; i++)
+    {
+        if(hasGreaterNeighbour(i) == false){
+            isStraight = false;
+            break;
+        }
+    }
+    
+    return isStraight;
 }

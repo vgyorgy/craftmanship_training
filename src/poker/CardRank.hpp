@@ -2,7 +2,7 @@
 
 typedef enum
 {
-    TWO,
+    TWO = 2,
     THREE,
     FOUR,
     FIVE,
