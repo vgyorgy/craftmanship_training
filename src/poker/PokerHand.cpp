@@ -122,6 +122,10 @@ PokerRank::Rank PokerHand::calculatePokerRank(void){
         return PokerRank::Rank::FLUSH;
     }
 
+    if (isStraight()) {
+        return PokerRank::Rank::STRAIGHT;
+    }
+
     if (isThreeOfAKind()) {
         return PokerRank::Rank::THREE_OF_A_KIND;
     }
@@ -132,10 +136,6 @@ PokerRank::Rank PokerHand::calculatePokerRank(void){
 
     if (isOnePair()) {
         return PokerRank::Rank::ONE_PAIR;
-    }
-
-    if (isStraight()) {
-        return PokerRank::Rank::STRAIGHT;
     }
 
     return PokerRank::Rank::HIGH_CARD;
