@@ -13,29 +13,24 @@ void PokerHand::add(Card card){
 
 bool PokerHand::isRoyalFlush(void) {
     return (isStraight() && cards.at(0).cardRank == CardRank::TEN &&
-            isFlush() && cards.at(0).cardSuit == CardSuit::SPADE);
+            isFlush());
 }
 
-bool PokerHand::isFlush()
-{
+bool PokerHand::isFlush() {
     for (auto card : cards) {
         if (card.cardSuit != cards.at(0).cardSuit) {
             return false;
-
         }
     }
     return true;
 }
 
-int PokerHand::countSameRanks(int numberOfSameKind)
-{
+int PokerHand::countSameRanks(int numberOfSameKind) {
     std::map<CardRank, int> countMap = groupCardsByRank();
     int countOfGroups = 0;
 
-    for (auto & item : countMap)    
-    {
-        if (item.second == numberOfSameKind)
-        {
+    for (auto & item : countMap) {
+        if (item.second == numberOfSameKind) {
             countOfGroups++;
         }
     }
@@ -43,18 +38,15 @@ int PokerHand::countSameRanks(int numberOfSameKind)
     return countOfGroups;
 }
 
-bool PokerHand::isOnePair()
-{
+bool PokerHand::isOnePair() {
     return countSameRanks(2) == 1;
 }
 
-bool PokerHand::isTwoPair(void)
-{
+bool PokerHand::isTwoPair(void) {
     return countSameRanks(2) == 2;
 }
 
-bool PokerHand::isThreeOfAKind()
-{
+bool PokerHand::isThreeOfAKind() {
     return countSameRanks(3) == 1;
 }
 std::map<CardRank, int> PokerHand::groupCardsByRank(void)
