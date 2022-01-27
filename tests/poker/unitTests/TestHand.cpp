@@ -8,7 +8,7 @@
 void fillHand(PokerHand &pokerHand, const std::vector<Card> &cards)
 {
     for (auto card : cards) {
-        pokerHand.add(card);
+        pokerHand.Add(card);
     }
 }
 
@@ -54,7 +54,7 @@ TEST(PokerHandTest, TestPokerRankFlush) {
         Card(CardSuit::SPADE, CardRank::SEVEN),
     });
 
-    ASSERT_EQ(pokerHand.getPokerRank(), PokerRank::Rank::FLUSH);
+    ASSERT_EQ(pokerHand.GetPokerRank(), PokerRank::Rank::FLUSH);
 }
 
 TEST(PokerHandTest, TestPokerRankPair) {
@@ -69,7 +69,7 @@ TEST(PokerHandTest, TestPokerRankPair) {
         Card(CardSuit::SPADE, CardRank::SEVEN),
     });
 
-    ASSERT_EQ(pokerHand.getPokerRank(), PokerRank::Rank::ONE_PAIR);
+    ASSERT_EQ(pokerHand.GetPokerRank(), PokerRank::Rank::ONE_PAIR);
 }
 
 TEST(PokerHandTest, TestPokerRankTwoPair) {
@@ -84,7 +84,7 @@ TEST(PokerHandTest, TestPokerRankTwoPair) {
         Card(CardSuit::SPADE, CardRank::EIGHT),
     });
 
-    ASSERT_EQ(pokerHand.getPokerRank(), PokerRank::Rank::TWO_PAIRS);
+    ASSERT_EQ(pokerHand.GetPokerRank(), PokerRank::Rank::TWO_PAIRS);
 }
 
 TEST(PokerHandTest, TestPokerRankStraight) {
@@ -98,7 +98,7 @@ TEST(PokerHandTest, TestPokerRankStraight) {
         Card(CardSuit::SPADE, CardRank::SEVEN),
     });
     
-    ASSERT_EQ(pokerHand.getPokerRank(), PokerRank::Rank::STRAIGHT);
+    ASSERT_EQ(pokerHand.GetPokerRank(), PokerRank::Rank::STRAIGHT);
 }
 
 TEST(PokerHandTest, TestPokerRankThreeOfAKind) {
@@ -112,7 +112,7 @@ TEST(PokerHandTest, TestPokerRankThreeOfAKind) {
         Card(CardSuit::SPADE, CardRank::SEVEN),
     });
     
-    ASSERT_EQ(pokerHand.getPokerRank(), PokerRank::Rank::THREE_OF_A_KIND);
+    ASSERT_EQ(pokerHand.GetPokerRank(), PokerRank::Rank::THREE_OF_A_KIND);
 }
 
 TEST(PokerHandTest, TestPokerRankRoyalFlush){
@@ -126,5 +126,33 @@ TEST(PokerHandTest, TestPokerRankRoyalFlush){
         Card(CardSuit::SPADE, CardRank::KING),
     });
     
-    ASSERT_EQ(pokerHand.getPokerRank(), PokerRank::Rank::ROYAL_FLUSH);
+    ASSERT_EQ(pokerHand.GetPokerRank(), PokerRank::Rank::ROYAL_FLUSH);
+}
+
+TEST(PokerHandTest, TestPokerRankFourOfaKind) {
+    PokerHand pokerHand;
+
+   fillHand(pokerHand, {
+        Card(CardSuit::SPADE, CardRank::SIX),
+        Card(CardSuit::HEART, CardRank::SIX),
+        Card(CardSuit::CLUB,  CardRank::SIX),
+        Card(CardSuit::SPADE, CardRank::EIGHT),
+        Card(CardSuit::DIAMOND, CardRank::SIX),
+    });
+    
+    ASSERT_EQ(pokerHand.GetPokerRank(), PokerRank::Rank::FOUR_OF_A_KIND);
+}
+
+TEST(PokerHandTest, TestPokerRankStraightFlush) {
+    PokerHand pokerHand;
+
+   fillHand(pokerHand, {
+        Card(CardSuit::SPADE, CardRank::SIX),
+        Card(CardSuit::SPADE, CardRank::NINE),
+        Card(CardSuit::SPADE, CardRank::SEVEN),
+        Card(CardSuit::SPADE, CardRank::EIGHT),
+        Card(CardSuit::SPADE, CardRank::FIVE),
+    });
+    
+    ASSERT_EQ(pokerHand.GetPokerRank(), PokerRank::Rank::STRAIGHT_FLUSH);
 }

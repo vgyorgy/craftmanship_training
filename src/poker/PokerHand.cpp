@@ -7,8 +7,14 @@
 PokerHand::PokerHand(){
 }
 
-void PokerHand::add(Card card){
+void PokerHand::Add(Card card){
     cards.push_back(card);
+}
+
+PokerRank::Rank PokerHand::GetPokerRank()
+{
+    sortCardsByRank();
+    return calculatePokerRank();
 }
 
 bool PokerHand::isRoyalFlush(void) {
@@ -34,7 +40,6 @@ int PokerHand::countSameRanks(int numberOfSameKind) {
             countOfGroups++;
         }
     }
-
     return countOfGroups;
 }
 
@@ -49,6 +54,15 @@ bool PokerHand::isTwoPair(void) {
 bool PokerHand::isThreeOfAKind() {
     return countSameRanks(3) == 1;
 }
+
+bool PokerHand::isFourOfAKind() {
+    return countSameRanks(4) == 1;
+}
+
+bool PokerHand::isStraightFlush(){
+    return (isFlush() && isStraight());
+}
+
 std::map<CardRank, int> PokerHand::groupCardsByRank(void)
 {
     std::map<CardRank, int> countMap;
@@ -56,39 +70,7 @@ std::map<CardRank, int> PokerHand::groupCardsByRank(void)
     {
         countMap[card.cardRank]++;
     }
-
     return countMap;
-}
-
-PokerRank::Rank PokerHand::getPokerRank()
-{
-    sortCardsByRank();
-
-    if (isRoyalFlush()) {
-        return PokerRank::Rank::ROYAL_FLUSH;
-    }
-
-    if (isFlush()) {
-        return PokerRank::Rank::FLUSH;
-    }
-
-    if (isThreeOfAKind()) {
-        return PokerRank::Rank::THREE_OF_A_KIND;
-    }
-
-    if (isTwoPair()){
-        return PokerRank::Rank::TWO_PAIRS;
-    }
-
-    if (isOnePair()) {
-        return PokerRank::Rank::ONE_PAIR;
-    }
-
-    if (isStraight()) {
-        return PokerRank::Rank::STRAIGHT;
-    }
-
-    throw NotImplementedExeption();
 }
 
 void PokerHand::sortCardsByRank (void){
@@ -112,6 +94,40 @@ bool PokerHand::isStraight(void){
             break;
         }
     }
-    
     return isStraight;
+}
+
+PokerRank::Rank PokerHand::calculatePokerRank(void){
+    if (isRoyalFlush()) {
+        return PokerRank::Rank::ROYAL_FLUSH;
+    }
+
+    if (isStraightFlush()) {
+        return PokerRank::Rank::STRAIGHT_FLUSH;
+    }
+
+    if (isFlush()) {
+        return PokerRank::Rank::FLUSH;
+    }
+
+    if (isFourOfAKind()) {
+        return PokerRank::Rank::FOUR_OF_A_KIND;
+    }
+
+    if (isThreeOfAKind()) {
+        return PokerRank::Rank::THREE_OF_A_KIND;
+    }
+
+    if (isTwoPair()){
+        return PokerRank::Rank::TWO_PAIRS;
+    }
+
+    if (isOnePair()) {
+        return PokerRank::Rank::ONE_PAIR;
+    }
+
+    if (isStraight()) {
+        return PokerRank::Rank::STRAIGHT;
+    }
+    throw NotImplementedExeption();
 }
