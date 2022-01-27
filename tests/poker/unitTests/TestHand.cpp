@@ -170,3 +170,17 @@ TEST(PokerHandTest, TestPokerRankHighCard) {
     
     ASSERT_EQ(pokerHand.GetPokerRank(), PokerRank::Rank::HIGH_CARD);
 }
+
+TEST(PokerHandTest, TestPokerRankIsFullHouse) {
+    PokerHand pokerHand;
+
+   fillHand(pokerHand, {
+        Card(CardSuit::SPADE, CardRank::SEVEN),
+        Card(CardSuit::DIAMOND, CardRank::SEVEN),
+        Card(CardSuit::SPADE, CardRank::NINE),
+        Card(CardSuit::HEART, CardRank::SEVEN),
+        Card(CardSuit::SPADE, CardRank::NINE),
+    });
+    
+    ASSERT_EQ(pokerHand.GetPokerRank(), PokerRank::Rank::FULL_HOUSE);
+}

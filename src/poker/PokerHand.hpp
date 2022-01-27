@@ -19,6 +19,7 @@ private:
     bool isThreeOfAKind(void);
     bool isStraight(void);
     bool isFlush(void);
+    bool isFullHouse(void);
     bool isFourOfAKind(void);
     bool isStraightFlush(void);
     bool isRoyalFlush(void);
