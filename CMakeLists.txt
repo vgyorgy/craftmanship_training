@@ -24,7 +24,10 @@ file(GLOB SOURCES
 include_directories(src)
 
 
-add_executable(pokerTest tests/poker/unitTests/TestHand.cpp ${SOURCES})
+add_executable(pokerTest 
+  tests/poker/unitTests/TestHand.cpp 
+  tests/poker/unitTests/TestGame.cpp 
+  ${SOURCES})
 target_link_libraries(pokerTest gtest_main ${GTEST_LIBRARIES} pthread)
 
 
