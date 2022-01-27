@@ -1,11 +1,10 @@
 #pragma once
-#include <string>
+
+#include "PokerRank.hpp"
+#include "Card.hpp"
 #include <vector>
 #include <map>
 
-#include "PokerRank.hpp"
-
-#include "Card.hpp"
 class PokerHand
 {
 public:

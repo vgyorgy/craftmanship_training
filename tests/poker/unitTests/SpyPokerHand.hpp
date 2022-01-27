@@ -1,6 +1,7 @@
 #pragma once
-#include <vector>
+
 #include "../../../src/poker/PokerHand.hpp"
+#include <vector>
 
 class SpyPokerHand:public PokerHand{
 public:
