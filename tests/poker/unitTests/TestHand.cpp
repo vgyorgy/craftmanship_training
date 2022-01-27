@@ -156,3 +156,17 @@ TEST(PokerHandTest, TestPokerRankStraightFlush) {
     
     ASSERT_EQ(pokerHand.GetPokerRank(), PokerRank::Rank::STRAIGHT_FLUSH);
 }
+
+TEST(PokerHandTest, TestPokerRankHighCard) {
+    PokerHand pokerHand;
+
+   fillHand(pokerHand, {
+        Card(CardSuit::SPADE, CardRank::SIX),
+        Card(CardSuit::SPADE, CardRank::NINE),
+        Card(CardSuit::DIAMOND, CardRank::THREE),
+        Card(CardSuit::SPADE, CardRank::EIGHT),
+        Card(CardSuit::SPADE, CardRank::FIVE),
+    });
+    
+    ASSERT_EQ(pokerHand.GetPokerRank(), PokerRank::Rank::HIGH_CARD);
+}

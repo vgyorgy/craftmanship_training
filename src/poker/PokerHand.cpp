@@ -129,5 +129,6 @@ PokerRank::Rank PokerHand::calculatePokerRank(void){
     if (isStraight()) {
         return PokerRank::Rank::STRAIGHT;
     }
-    throw NotImplementedExeption();
+
+    return PokerRank::Rank::HIGH_CARD;
 }
