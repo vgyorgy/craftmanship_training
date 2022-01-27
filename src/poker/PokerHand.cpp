@@ -22,6 +22,10 @@ bool PokerHand::isRoyalFlush(void) {
             isFlush());
 }
 
+bool PokerHand::isFullHouse(void) {
+    return (isOnePair() && isThreeOfAKind());
+}
+
 bool PokerHand::isFlush() {
     for (auto card : cards) {
         if (card.cardSuit != cards.at(0).cardSuit) {
@@ -106,12 +110,20 @@ PokerRank::Rank PokerHand::calculatePokerRank(void){
         return PokerRank::Rank::STRAIGHT_FLUSH;
     }
 
+    if (isFourOfAKind()) {
+        return PokerRank::Rank::FOUR_OF_A_KIND;
+    }
+
+    if (isFullHouse()) {
+        return PokerRank::Rank::FULL_HOUSE;
+    }
+
     if (isFlush()) {
         return PokerRank::Rank::FLUSH;
     }
 
-    if (isFourOfAKind()) {
-        return PokerRank::Rank::FOUR_OF_A_KIND;
+    if (isStraight()) {
+        return PokerRank::Rank::STRAIGHT;
     }
 
     if (isThreeOfAKind()) {
@@ -124,10 +136,6 @@ PokerRank::Rank PokerHand::calculatePokerRank(void){
 
     if (isOnePair()) {
         return PokerRank::Rank::ONE_PAIR;
-    }
-
-    if (isStraight()) {
-        return PokerRank::Rank::STRAIGHT;
     }
 
     return PokerRank::Rank::HIGH_CARD;
