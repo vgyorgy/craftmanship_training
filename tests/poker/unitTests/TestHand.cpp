@@ -128,19 +128,3 @@ TEST(PokerHandTest, TestPokerRankRoyalFlush){
     
     ASSERT_EQ(pokerHand.getPokerRank(), PokerRank::Rank::ROYAL_FLUSH);
 }
-
-
-
-TEST(PokerHandTest, TestPokerRankStraightFlush){
-    PokerHand pokerHand;
-
-    fillHand(pokerHand, {
-        Card(CardSuit::SPADE, CardRank::SIX),
-        Card(CardSuit::SPADE, CardRank::NINE),
-        Card(CardSuit::SPADE, CardRank::SEVEN),
-        Card(CardSuit::SPADE, CardRank::TEN),
-        Card(CardSuit::SPADE, CardRank::EIGHT),
-    });
-    
-    ASSERT_EQ(pokerHand.getPokerRank(), PokerRank::Rank::STRAIGHT_FLUSH);
-}

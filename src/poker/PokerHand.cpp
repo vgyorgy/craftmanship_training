@@ -16,11 +16,6 @@ bool PokerHand::isRoyalFlush(void) {
             isFlush());
 }
 
-bool PokerHand::isStraightFlush(void){
-    return (isStraight() &&
-            isFlush());
-}
-
 bool PokerHand::isFlush() {
     for (auto card : cards) {
         if (card.cardSuit != cards.at(0).cardSuit) {
@@ -71,10 +66,6 @@ PokerRank::Rank PokerHand::getPokerRank()
 
     if (isRoyalFlush()) {
         return PokerRank::Rank::ROYAL_FLUSH;
-    }
-
-    if (isStraightFlush()) {
-        return PokerRank::Rank::STRAIGHT_FLUSH;
     }
 
     if (isFlush()) {
