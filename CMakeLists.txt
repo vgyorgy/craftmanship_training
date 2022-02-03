@@ -26,7 +26,8 @@ include_directories(src)
 
 add_executable(pokerTest 
   tests/poker/unitTests/TestHand.cpp 
-  tests/poker/unitTests/TestGame.cpp 
+  tests/poker/unitTests/TestGame.cpp
+  tests/poker/unitTests/TestParser.cpp
   ${SOURCES})
 target_link_libraries(pokerTest gtest_main ${GTEST_LIBRARIES} pthread)
 
