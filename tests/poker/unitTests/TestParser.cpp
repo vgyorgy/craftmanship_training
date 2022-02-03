@@ -50,3 +50,4 @@ TEST(PokerParserTest, TestCardConverter_H11) {
     ASSERT_THROW(CardConverter::ConvertStringToCard("H11"), InvalidCardException);
     // assertCard(CardConverter::ConvertStringToCard("H11"), CardSuit::HEART, CardRank::TEN);
 }
+
